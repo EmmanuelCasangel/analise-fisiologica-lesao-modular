@@ -50,7 +50,7 @@ try:
     dados = dados.loc[
         (dados['r1_ip'] <= 5) &
         (dados['r2_ip'] <= 5) &
-        (dados['r3_ip'] <= 5)
+        (dados['r3_ip'] <= 2)
     ]
 
     # Resetar o índice para começar em 1
