@@ -105,7 +105,7 @@ with tab1:
 
 with tab2:
     st.header("Análise das Variáveis")
-# Calcular a matriz de correlação
+    # Calcular a matriz de correlação
     matriz_correlacao_spearman = dados.corr(method='spearman')
 
     # Criar o heatmap com Matplotlib/Seaborn
@@ -157,25 +157,30 @@ with tab2:
     fig, ax = plt.subplots(figsize=(12, 6))
         
     if selected_var == 'Índices de Perfusão':
-        # Plotar todas as séries de perfusão juntas
+        # Separar cada índice em um gráfico
         perfusion_cols = ['r1_ip', 'r2_ip', 'r3_ip']
         colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
         labels = [var_names[col] for col in perfusion_cols]
         
-        for col, color, label in zip(perfusion_cols, colors, labels):
+        fig, axs = plt.subplots(3, 1, figsize=(12, 12), sharex=True)
+        
+        for i, (col, color, label) in enumerate(zip(perfusion_cols, colors, labels)):
             sns.lineplot(
                 x=dados.index,
                 y=dados[col],
-                ax=ax,
+                ax=axs[i],
                 marker='o',
                 markersize=4,
                 linewidth=1,
                 label=label,
                 color=color
             )
+            axs[i].set_title(f"{label} por Observação")
+            axs[i].set_ylabel("Valor do Índice")
+            axs[i].legend()
+            axs[i].grid(True, linestyle='--', alpha=0.7)
         
-        ax.set_title("Índices de Perfusão por Observação")
-        ax.set_ylabel("Valor do Índice")
+        axs[-1].set_xlabel("Número da Observação (Índice)")
         
     elif selected_var == 'Pressões Arteriais':
         # Plotar todas as pressões juntas
