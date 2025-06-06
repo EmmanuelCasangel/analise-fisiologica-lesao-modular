@@ -105,6 +105,26 @@ with tab1:
 
 with tab2:
     st.header("Análise das Variáveis")
+# Calcular a matriz de correlação
+    matriz_correlacao_spearman = dados.corr(method='spearman')
+
+    # Criar o heatmap com Matplotlib/Seaborn
+    fig, ax = plt.subplots(figsize=(10, 8))
+    sns.heatmap(
+        matriz_correlacao_spearman,
+        annot=True,
+        cmap='coolwarm',
+        fmt=".2f",
+        linewidths=0.5,
+        ax=ax
+    )
+    ax.set_title('Matriz de Correlação Spearman das Colunas Numéricas')
+
+    # Exibir o gráfico no Streamlit
+    st.pyplot(fig)
+    
+
+    
     st.info("Selecione uma variável ou grupo abaixo para visualizar seus valores ao longo das observações")
 
     # Dicionário de mapeamento de variáveis para nomes em português
