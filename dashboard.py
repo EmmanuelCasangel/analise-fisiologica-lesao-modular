@@ -104,7 +104,7 @@ with tab1:
     """)
 
 with tab2:
-    st.header("Análise Série Temporal das Variáveis")
+    st.header("Análise das Variáveis")
     st.info("Selecione uma variável ou grupo abaixo para visualizar seus valores ao longo das observações")
 
     # Dicionário de mapeamento de variáveis para nomes em português
